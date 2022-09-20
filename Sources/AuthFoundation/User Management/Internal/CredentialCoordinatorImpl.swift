@@ -86,11 +86,14 @@ final class CredentialCoordinatorImpl: CredentialCoordinator {
     }
     
     static func defaultTokenStorage() -> TokenStorage {
-        #if os(iOS) || os(macOS) || os(tvOS) || os(watchOS)
-        KeychainTokenStorage()
-        #else
+        // HACK: always use `UserDefaultsStorage` for cli
         UserDefaultsTokenStorage()
-        #endif
+
+//        #if os(iOS) || os(macOS) || os(tvOS) || os(watchOS)
+//        KeychainTokenStorage()
+//        #else
+//        UserDefaultsTokenStorage()
+//        #endif
     }
     
     static func defaultCredentialDataSource() -> CredentialDataSource {
